@@ -36,3 +36,12 @@ def test_sundae():
     assert testsundae.topping_price == 1.5
     assert testsundae.topping_name == "Chocolate Chips"
     assert testsundae.topping_price == 0.5
+
+
+def test_candy_calculate_cost():
+    candy = Candy("Candy Corn", 0.5, 0.76)
+    assert candy.calculate_cost() == 0.38
+
+def test_candy_calculate_tax():
+    candy = Candy("Candy Corn", 0.5, 0.76)
+    assert round(candy.calculate_tax(), 2) == 0.03

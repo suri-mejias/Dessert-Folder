@@ -1,70 +1,35 @@
-from abc import ABC, abstractmethod
-
-
-class DessertItem(ABC):
-    def __init__(self, name: str = "", tax_percent: float = 7.25,):
+class Dessert:
+    def __init__(self, name, quantity, price_per_unit):
         self.name = name
-    @abstractmethod
-    def calculate_cost():
-        pass
-    def calculate_tax():
-        return self.name * self.tax_percent
+        self.quantity = quantity
+        self.price_per_unit = price_per_unit
 
+    def calculate_cost(self):
+        return self.quantity * self.price_per_unit
 
-class Candy(DessertItem):
-    def __init__(self, name: str = "", candy_weight: float = 0.0, price_per_pound: float = 0.0):
-        self.name = name
-        self.candy_weight = candy_weight
-        self.price_per_pound = price_per_pound
-        super().__init__(name)
+    def calculate_tax(self):
+        return self.calculate_cost() * 0.07  # 7% tax (just an example)
 
-def calculate_cost():
-    return corerct cost of item
+class Candy(Dessert):
+    def __init__(self, name, quantity, price_per_unit):
+        super().__init__(name, quantity, price_per_unit)
 
-class Cookie(DessertItem):
-    def __init__(self, name: str =  "", cookie_quantity: int = 0, price_per_dozen: float = 0.0):
-        self.name = name
-        self.cookie_quantity = cookie_quantity
-        self.price_per_dozen = price_per_dozen
-        super().__init__(name)
+class Cookie(Dessert):
+    def __init__(self, name, quantity, price_per_unit):
+        super().__init__(name, quantity, price_per_unit)
 
-    def calculate_cost():
-    return corerct cost of item
-
-class IceCream(DessertItem):
-    def __init__(self, name: str = "", scoop_count: int = 0, price_per_scoop:  float = 0.0):
-        self.name = name
-        self.scoop_count = scoop_count
-        self. price_per_scoop = price_per_scoop
-        super().__init__(name)
-
-    def calculate_cost():
-    return corerct cost of item
+class IceCream(Dessert):
+    def __init__(self, name, quantity, price_per_unit):
+        super().__init__(name, quantity, price_per_unit)
 
 class Sundae(IceCream):
-    def __init__(self, name: str = "", scoop_count: int = 0, price_per_scoop: float = 0.0, topping_name: str = "", topping_price: float = 0.0):
-        self.name = name
-        self.scoop_count = scoop_count
-        self.price_per_scoop = price_per_scoop
+    def __init__(self, name, quantity, price_per_unit, topping_name, topping_price):
+        super().__init__(name, quantity, price_per_unit)
         self.topping_name = topping_name
         self.topping_price = topping_price
-        super().__init__(name, scoop_count, price_per_scoop)
 
-    def calculate_cost():
-    return corerct cost of item
+    def calculate_cost(self):
+        return super().calculate_cost() + self.topping_price  # Include topping cost
 
-class Order():
-    def main():
-        Candy("Candy Corn", 1.5, .25)
-        Candy("Gummy Bears", .25, .35)
-        Cookie("Chocolate Chip", 6, 3.99)
-        IceCream("Pistachio", 2, .79)
-        Sundae("Vanilla", 3, .69, "Hot Fudge", 1.29)
-        Cookie("Oatmeal Raisin", 2, 3.45)
-
-    def order_cost():
-        return cost of all items
-    
-    def order_tax():
-        return tax of all items in the order
-        
+    def calculate_tax(self):
+        return self.calculate_cost() * 0.07  # Calculate tax for Sundae including topping
