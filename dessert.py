@@ -8,7 +8,7 @@ class Dessert:
         return self.quantity * self.price_per_unit
 
     def calculate_tax(self):
-        return self.calculate_cost() * 0.07  # 7% tax (just an example)
+        return self.calculate_cost() * 0.07  
 
 class Candy(Dessert):
     def __init__(self, name, quantity, price_per_unit):
@@ -29,7 +29,7 @@ class Sundae(IceCream):
         self.topping_price = topping_price
 
     def calculate_cost(self):
-        return super().calculate_cost() + self.topping_price  # Include topping cost
+        return super().calculate_cost() + self.topping_price 
 
     def calculate_tax(self):
-        return self.calculate_cost() * 0.07  # Calculate tax for Sundae including topping
+        return self.calculate_cost() * 0.07
