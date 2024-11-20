@@ -4,7 +4,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet
 
 def make_receipt(data, out_file_name):
-    print(f"Attempting to generate receipt PDF at: {out_file_name}")  # Added debug print
+    print(f"Attempting to generate receipt PDF at: {out_file_name}")
 
     try:
         pdf = SimpleDocTemplate(out_file_name, pagesize=A4)
@@ -27,6 +27,6 @@ def make_receipt(data, out_file_name):
         table = Table(data, style=style)
 
         pdf.build([title, table])
-        print(f"Receipt PDF successfully created at {out_file_name}")  # Success message
+        print(f"Receipt PDF successfully created at {out_file_name}")
     except Exception as e:
         print(f"Error in generating the PDF: {e}")
