@@ -25,7 +25,7 @@ class Cookie(Dessert):
         super().__init__(name, quantity, price_per_unit)
 
     def calculate_cost(self):
-        return (self.quantity / 12) * self.price_per_unit  # Assume price per dozen
+        return (self.quantity / 12) * self.price_per_unit
 
 class IceCream(Dessert):
     def __init__(self, name, quantity, price_per_unit):
