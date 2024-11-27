@@ -102,26 +102,30 @@ class Order:
     def add(self, dessert_item):
         self.items.append(dessert_item)
 
-    def get_data(self):
-        data = []
-        for item in self.items:
-            cost = item.calculate_cost()
-            tax = item.calculate_tax()
-            data.append([item.name, f"${cost:.2f}", f"${tax:.2f}"])
-
-        order_cost = self.order_cost()
-        order_tax = self.order_tax()
-        data.append(["Order Subtotals", f"${order_cost:.2f}", f"${order_tax:.2f}"])
-        data.append(["Order Total", f"${order_cost + order_tax:.2f}", ""])
-        data.append([f"Total items in the order", len(self.items), ""])
-
-        return data
-
     def order_cost(self):
         return sum(item.calculate_cost() for item in self.items)
 
     def order_tax(self):
         return sum(item.calculate_tax() for item in self.items)
+
+    def get_data(self):
+        # Preparing the table data
+        data = [["Name", "Quantity", "Unit Price", "Cost", "Tax"]]
+
+        for item in self.items:
+            item_data = str(item).split(", ")
+            # Split the string into separate columns based on commas
+            data.append([col.strip() for col in item_data])
+        
+        # Adding the subtotal, tax, and total to the data
+        subtotal = self.order_cost()
+        tax = self.order_tax()
+        total = subtotal + tax
+        data.append(["Order Subtotal", "", "", f"${subtotal:.2f}", f"${tax:.2f}"])
+        data.append(["Order Total", "", "", f"${total:.2f}", ""])
+        data.append(["Total items in the order", "", "", len(self.items), ""])
+
+        return data
 
 def main():
     print("Welcome to the Dessert Shop!")
@@ -146,8 +150,10 @@ def main():
         else:
             print("Invalid choice. Please enter a number between 1 and 4.")
 
-    data = order.get_data()
+    print("\nReceipt:")
+    print(order)
 
+    data = order.get_data()
     pdf_path = "receipt.pdf"
     receipt.make_receipt(data, pdf_path)
     print(f"\nReceipt PDF has been saved to: {pdf_path}")
