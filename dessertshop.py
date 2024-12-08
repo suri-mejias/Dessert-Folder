@@ -95,6 +95,7 @@ class DessertShop:
                 print(e)
         return Sundae(name, scoops, price_per_scoop, topping, price_for_topping)
 
+
 class Order:
     def __init__(self):
         self.items = []
@@ -109,15 +110,12 @@ class Order:
         return sum(item.calculate_tax() for item in self.items)
 
     def get_data(self):
-        # Preparing the table data
         data = [["Name", "Quantity", "Unit Price", "Cost", "Tax"]]
 
         for item in self.items:
             item_data = str(item).split(", ")
-            # Split the string into separate columns based on commas
             data.append([col.strip() for col in item_data])
         
-        # Adding the subtotal, tax, and total to the data
         subtotal = self.order_cost()
         tax = self.order_tax()
         total = subtotal + tax
@@ -126,6 +124,19 @@ class Order:
         data.append(["Total items in the order", "", "", len(self.items), ""])
 
         return data
+
+    def __str__(self):
+        result = ["Order Summary:"]
+        for item in self.items:
+            result.append(f" - {item}")
+        subtotal = self.order_cost()
+        tax = self.order_tax()
+        total = subtotal + tax
+        result.append(f"\nSubtotal: ${subtotal:.2f}")
+        result.append(f"Tax: ${tax:.2f}")
+        result.append(f"Total: ${total:.2f}")
+        return "\n".join(result)
+
 
 def main():
     print("Welcome to the Dessert Shop!")
@@ -157,6 +168,7 @@ def main():
     pdf_path = "receipt.pdf"
     receipt.make_receipt(data, pdf_path)
     print(f"\nReceipt PDF has been saved to: {pdf_path}")
+
 
 if __name__ == "__main__":
     main()

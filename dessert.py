@@ -31,18 +31,38 @@ class Candy(Dessert):
         tax = self.calculate_tax()
         return f"{self.name}, {self.quantity}lbs, ${self.price_per_unit:.2f}/lb, ${cost:.2f}, ${tax:.2f}"
 
+    # Getter methods cause coding is hard :(
+    def get_name(self):
+        return self.name
+    
+    def get_quantity(self):
+        return self.quantity
+    
+    def get_price_per_unit(self):
+        return self.price_per_unit
+
 
 class Cookie(Dessert):
     def __init__(self, name, quantity, price_per_unit, tax_percent=7):
         super().__init__(name, quantity, price_per_unit, tax_percent)
 
     def calculate_cost(self):
-        return (self.quantity / 12) * self.price_per_unit  # Assume price per dozen
+        return (self.quantity / 12) * self.price_per_unit  
 
     def __str__(self):
         cost = self.calculate_cost()
         tax = self.calculate_tax()
         return f"{self.name}, {self.quantity} cookies, ${self.price_per_unit:.2f}/dozen, ${cost:.2f}, ${tax:.2f}"
+
+    # Getter methods cause coding is hard :(
+    def get_name(self):
+        return self.name
+    
+    def get_quantity(self):
+        return self.quantity
+    
+    def get_price_per_unit(self):
+        return self.price_per_unit
 
 
 class IceCream(Dessert):
@@ -56,6 +76,16 @@ class IceCream(Dessert):
         cost = self.calculate_cost()
         tax = self.calculate_tax()
         return f"{self.name}, {self.quantity} scoops, ${self.price_per_unit:.2f}/scoop, ${cost:.2f}, ${tax:.2f}"
+
+    # Getter methods cause coding is hard :(
+    def get_name(self):
+        return self.name
+    
+    def get_quantity(self):
+        return self.quantity
+    
+    def get_price_per_unit(self):
+        return self.price_per_unit
 
 
 class Sundae(IceCream):
@@ -71,3 +101,16 @@ class Sundae(IceCream):
         cost = self.calculate_cost()
         tax = self.calculate_tax()
         return f"{self.topping_name} {self.name} Sundae, {self.quantity} scoops, ${self.price_per_unit:.2f}/scoop, ${cost:.2f}, ${tax:.2f}"
+
+    # Getter methods cause coding is hard :(
+    def get_name(self):
+        return self.name
+    
+    def get_quantity(self):
+        return self.quantity
+    
+    def get_price_per_unit(self):
+        return self.price_per_unit
+
+    def get_topping_name(self):
+        return self.topping_name
