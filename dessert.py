@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 class Dessert(ABC):
-    def __init__(self, name, quantity, price_per_unit, tax_percent=7):
+    def __init__(self, name, quantity, price_per_unit, tax_percent=7.25):
         self.name = name
         self.quantity = quantity
         self.price_per_unit = price_per_unit
@@ -20,7 +20,7 @@ class Dessert(ABC):
 
 
 class Candy(Dessert):
-    def __init__(self, name, quantity, price_per_unit, tax_percent=7):
+    def __init__(self, name, quantity, price_per_unit, tax_percent=7.25):
         super().__init__(name, quantity, price_per_unit, tax_percent)
 
     def calculate_cost(self):
@@ -43,7 +43,7 @@ class Candy(Dessert):
 
 
 class Cookie(Dessert):
-    def __init__(self, name, quantity, price_per_unit, tax_percent=7):
+    def __init__(self, name, quantity, price_per_unit, tax_percent=7.25):
         super().__init__(name, quantity, price_per_unit, tax_percent)
 
     def calculate_cost(self):
@@ -66,7 +66,7 @@ class Cookie(Dessert):
 
 
 class IceCream(Dessert):
-    def __init__(self, name, quantity, price_per_unit, tax_percent=7):
+    def __init__(self, name, quantity, price_per_unit, tax_percent=7.25):
         super().__init__(name, quantity, price_per_unit, tax_percent)
 
     def calculate_cost(self):
@@ -89,7 +89,7 @@ class IceCream(Dessert):
 
 
 class Sundae(IceCream):
-    def __init__(self, name, quantity, price_per_unit, topping_name, topping_price, tax_percent=7):
+    def __init__(self, name, quantity, price_per_unit, topping_name, topping_price, tax_percent=7.25):
         super().__init__(name, quantity, price_per_unit, tax_percent)
         self.topping_name = topping_name
         self.topping_price = topping_price
