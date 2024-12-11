@@ -110,18 +110,21 @@ class Order:
         return sum(item.calculate_tax() for item in self.items)
 
     def get_data(self):
-        data = [["Name", "Quantity", "Unit Price", "Cost", "Tax"]]
+        data = [["Name", "Quantity", "Unit Price", "Cost", "Tax", "Packaging"]]
 
         for item in self.items:
-            item_data = str(item).split(", ")
-            data.append([col.strip() for col in item_data])
-        
+            item_data = str(item).split("\n")
+            item_details = item_data[0].split(":")
+            item_data[0] = item_details[0]
+            item_data[0] += f" ({item.packaging})"
+            data.append([col.strip() for col in item_data[0].split(", ")])
+
         subtotal = self.order_cost()
         tax = self.order_tax()
         total = subtotal + tax
-        data.append(["Order Subtotal", "", "", f"${subtotal:.2f}", f"${tax:.2f}"])
-        data.append(["Order Total", "", "", f"${total:.2f}", ""])
-        data.append(["Total items in the order", "", "", len(self.items), ""])
+        data.append(["Order Subtotal", "", "", f"${subtotal:.2f}", f"${tax:.2f}", ""])
+        data.append(["Order Total", "", "", f"${total:.2f}", "", ""])
+        data.append(["Total items in the order", "", "", len(self.items), "", ""])
 
         return data
 

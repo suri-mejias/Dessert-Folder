@@ -8,13 +8,13 @@ def make_receipt(data, out_file_name):
 
     try:
         pdf = SimpleDocTemplate(out_file_name, pagesize=A4)
-        
+
         styles = getSampleStyleSheet()
-        
+
         title_style = styles["Heading1"]
         title_style.alignment = 1
         title = Paragraph("Receipt", title_style)
-        
+
         style = TableStyle(
             [
                 ("BOX", (0, 0), (-1, -1), 1, colors.black),  # Box around the table
@@ -29,8 +29,8 @@ def make_receipt(data, out_file_name):
         table = Table(data, style=style)
 
         pdf.build([title, table])
-        
+
         print(f"Receipt PDF successfully created at {out_file_name}")
-    
+
     except Exception as e:
         print(f"Error in generating the PDF: {e}")
